@@ -33,7 +33,11 @@ http://localhost:3000/api/groups - апи
 1) Создать файл .env.local в корне проекта
     ```
     # .env.local
+<<<<<<< HEAD
     DB="G:/db/vki-web.db"
+=======
+    DB="g:/db/vki-web.db"
+>>>>>>> 53fad53d2a244e059e618f1814e3675be23e0926
     NEXT_PUBLIC_API="http://localhost:3000/api/"
     ```
 2) Скопировать базу данных и ./db/vki-web.db в G:\db\vki-web.db

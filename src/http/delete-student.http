@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 DELETE http://localhost:3000/api/students/1
 Content-Type: application/json
+=======
+DELETE http://localhost:3000/api/students/2
+   Content-Type: application/json
+>>>>>>> 53fad53d2a244e059e618f1814e3675be23e0926
