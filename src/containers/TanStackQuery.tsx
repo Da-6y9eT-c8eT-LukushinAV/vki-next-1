@@ -12,13 +12,7 @@ interface Props {
 }
 
 const TanStackQuery = ({ state, children }: Props): React.ReactElement => {
-<<<<<<< HEAD
-  hydrate(queryClient, state)
-=======
-
-  hydrate(queryClient, state)
-
->>>>>>> 53fad53d2a244e059e618f1814e3675be23e0926
+  hydrate(queryClient, state);
   return (
   <QueryClientProvider client={queryClient}>
     {/* <HydrationBoundary

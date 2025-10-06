@@ -1,7 +1,6 @@
-import { dehydrate } from '@tanstack/react-query';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 import TanStackQuery from '@/containers/TanStackQuery';
-import queryClient from '@/api/reactQueryClient';
 import { getGroupsApi } from '@/api/groupsApi';
 import type GroupInterface from '@/types/GroupInterface';
 import Header from '@/components/layout/Header/Header';
@@ -21,6 +20,9 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>): Promise<React.ReactElement> => {
+  // Создаем новый QueryClient на каждый серверный запрос,
+  // чтобы не тащить кэш между перезагрузками/запросами
+  const queryClient = new QueryClient();
 
   // выполняется на сервере - загрузка групп
   let groups: GroupInterface[];
