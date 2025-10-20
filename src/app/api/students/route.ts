@@ -26,7 +26,13 @@ export async function POST(request: Request): Promise<Response> {
       return new Response(JSON.stringify({ error: 'firstName and lastName are required' }), { status: 400 });
     }
 
-    const created = await addStudentDb(String(firstName), String(lastName), String(middleName ?? ''), Number(groupId ?? 1));
+    const created = await addStudentDb({
+      firstName,
+      lastName,
+      middleName,
+      groupId: Number(groupId ?? 1),
+      contacts: '',
+  });
 
     return new Response(JSON.stringify(created), {
       headers: { 'Content-Type': 'application/json' },
