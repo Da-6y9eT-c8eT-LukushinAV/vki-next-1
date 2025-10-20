@@ -71,7 +71,7 @@ const useStudents = (): StudentsHookInterface => {
     onMutate: async (payload) => {
       await queryClient.cancelQueries({ queryKey: ['students'] });
       const previousStudents = queryClient.getQueryData<StudentInterface[]>(['students']);
-      const tempId = Math.floor(Math.random() * -1000000);
+      const tempId = Math.floor(-1);
       const optimistic: StudentInterface = {
         id: tempId,
         firstName: payload.firstName,
