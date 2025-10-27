@@ -10,10 +10,16 @@ const Students = (): React.ReactElement => {
   const { students, deleteStudentMutate, addStudentMutate } = useStudents();
 
   const onDeleteHandler = (studentId: number): void => {
+    debugger;
+    console.log('onDeleteHandler', studentId);
+
     deleteStudentMutate(studentId);
   };
 
   const onAddHandler = (payload: { firstName: string; lastName: string; middleName?: string }): void => {
+    debugger;  
+    console.log('Добавление студента', payload);
+
     addStudentMutate(payload);
   };
 
