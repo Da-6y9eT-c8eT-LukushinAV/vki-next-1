@@ -14,6 +14,15 @@ export const getStudentsDb = async (): Promise<StudentInterface[]> => {
 };
 
 /**
+ * Получение студента по ID
+ * @param studentId ИД студента
+ * @returns Promise<StudentInterface | null>
+ */
+export const getStudentDb = async (studentId: number): Promise<StudentInterface | null> => {
+  return await studentRepository.findOne({ where: { id: studentId } });
+};
+
+/**
  * Удаления студента
  * @param studentId ИД удаляемого студента
  * @returns

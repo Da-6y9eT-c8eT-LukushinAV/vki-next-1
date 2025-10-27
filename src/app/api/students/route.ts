@@ -1,20 +1,32 @@
 import { addStudentDb, getStudentsDb } from '@/db/studentDb';
 
 export async function GET(): Promise<Response> {
-  const students = await getStudentsDb();
-  // Нормализуем ключи к camelCase на случай, если БД/данные содержат snake_case
-  const normalized = (students as any[]).map((s) => ({
-    id: s.id,
-    firstName: s.firstName ?? s.first_name ?? '',
-    lastName: s.lastName ?? s.last_name ?? '',
-    middleName: s.middleName ?? s.middle_name ?? '',
-  }));
+  try {
+    const students = await getStudentsDb();
+    
+    // Нормализуем ключи к camelCase на случай, если БД/данные содержат snake_case
+    const normalized = (students as any[]).map((s) => ({
+      id: s.id,
+      firstName: s.firstName ?? s.first_name ?? '',
+      lastName: s.lastName ?? s.last_name ?? '',
+      middleName: s.middleName ?? s.middle_name ?? '',
+      contacts: s.contacts ?? '',
+      groupId: s.groupId ?? s.group_id ?? undefined,
+    }));
 
-  return new Response(JSON.stringify(normalized), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+    return new Response(JSON.stringify(normalized), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+  catch (err) {
+    console.error('GET /api/students error:', err);
+    return new Response(JSON.stringify({ error: 'Failed to fetch students' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 };
 
 export async function POST(request: Request): Promise<Response> {
