@@ -9,7 +9,7 @@ import type StudentInterface from '@/types/StudentInterface';
 interface StudentsHookInterface {
   students: StudentInterface[];
   deleteStudentMutate: (studentId: number) => void;
-  addStudentMutate: (p: { firstName: string; lastName: string; middleName?: string }) => void;
+  addStudentMutate: (p: { firstName: string; lastName: string; middleName?: string; groupId?: number }) => void;
 }
 
 const useStudents = (): StudentsHookInterface => {
@@ -73,7 +73,7 @@ const useStudents = (): StudentsHookInterface => {
    * Мутация добавления студента
    */
   const addStudentMutate = useMutation({
-    mutationFn: async (payload: { firstName: string; lastName: string; middleName?: string }) => addStudentApi(payload),
+    mutationFn: async (payload: { firstName: string; lastName: string; middleName?: string; groupId?: number }) => addStudentApi(payload),
     onMutate: async (payload) => {
       await queryClient.cancelQueries({ queryKey: ['students'] });
       const previousStudents = queryClient.getQueryData<StudentInterface[]>(['students']);
@@ -83,6 +83,8 @@ const useStudents = (): StudentsHookInterface => {
         firstName: payload.firstName,
         lastName: payload.lastName,
         middleName: payload.middleName ?? '',
+        groupId: payload.groupId,
+        contacts: '',
       };
       const updated = [optimistic, ...(previousStudents ?? [])];
       queryClient.setQueryData<StudentInterface[]>(['students'], updated);

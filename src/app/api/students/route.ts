@@ -12,6 +12,13 @@ export async function GET(): Promise<Response> {
       middleName: s.middleName ?? s.middle_name ?? '',
       contacts: s.contacts ?? '',
       groupId: s.groupId ?? s.group_id ?? undefined,
+      group: s.group
+        ? {
+            id: (s.group as any).id,
+            name: (s.group as any).name,
+            contacts: (s.group as any).contacts ?? '',
+          }
+        : undefined,
     }));
 
     return new Response(JSON.stringify(normalized), {

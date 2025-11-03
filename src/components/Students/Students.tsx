@@ -1,6 +1,7 @@
 'use client';
 
 import useStudents from '@/hooks/useStudents';
+import useGroups from '@/hooks/useGroups';
 import type StudentInterface from '@/types/StudentInterface';
 import Student from '@/components/Students/Student/Student';
 import AddStudent from '@/components/Students/AddStudent/AddStudent';
@@ -8,6 +9,7 @@ import styles from './Students.module.scss';
 
 const Students = (): React.ReactElement => {
   const { students, deleteStudentMutate, addStudentMutate } = useStudents();
+  const { groups } = useGroups();
 
   const onDeleteHandler = (studentId: number): void => {
     debugger;
@@ -16,7 +18,7 @@ const Students = (): React.ReactElement => {
     deleteStudentMutate(studentId);
   };
 
-  const onAddHandler = (payload: { firstName: string; lastName: string; middleName?: string }): void => {
+  const onAddHandler = (payload: { firstName: string; lastName: string; middleName?: string; groupId?: number }): void => {
     debugger;  
     console.log('Добавление студента', payload);
 
@@ -29,7 +31,10 @@ const Students = (): React.ReactElement => {
       {students.map((student: StudentInterface) => (
         <Student
           key={student.id}
-          student={student}
+          student={{
+            ...student,
+            group: student.group ?? groups.find(g => g.id === (student.groupId ?? -1)) ?? undefined,
+          }}
           onDelete={onDeleteHandler}
         />
       ))}

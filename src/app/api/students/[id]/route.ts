@@ -20,6 +20,13 @@ export async function GET(_request: Request, { params }: { params: { id: string 
     middleName: (student as any).middleName ?? (student as any).middle_name ?? '',
     contacts: (student as any).contacts ?? '',
     groupId: (student as any).groupId ?? (student as any).group_id ?? undefined,
+    group: (student as any).group
+      ? {
+          id: (student as any).group.id,
+          name: (student as any).group.name,
+          contacts: (student as any).group.contacts ?? '',
+        }
+      : undefined,
   };
 
   return new Response(JSON.stringify(normalized), {

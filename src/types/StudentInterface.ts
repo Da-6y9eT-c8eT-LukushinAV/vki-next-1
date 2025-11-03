@@ -6,6 +6,7 @@ interface StudentInterface {
   isDeleted?: boolean;
   groupId?: number;
   contacts: string;
+  group?: import('./GroupInterface').default | null;
 };
 
 export default StudentInterface;

@@ -49,10 +49,12 @@ const StudentDetail = (): React.ReactElement => {
           <span className={styles.label}>Отчество:</span>
           <span className={styles.value}>{student.middleName || '-'}</span>
         </div>
-        {student.groupId && (
+        {(student.group || student.groupId) && (
           <div className={styles.row}>
-            <span className={styles.label}>Группа ID:</span>
-            <span className={styles.value}>{student.groupId}</span>
+            <span className={styles.label}>Группа:</span>
+            <span className={styles.value}>
+              {student.group ? `${student.group.name} (ID: ${student.group.id})` : student.groupId}
+            </span>
           </div>
         )}
         {student.contacts && (

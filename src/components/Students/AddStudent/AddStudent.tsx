@@ -1,12 +1,14 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import useGroups from '@/hooks/useGroups';
 import styles from './AddStudent.module.scss';
 
 interface AddStudentFormValues {
   firstName: string;
   lastName: string;
   middleName?: string;
+  groupId?: number;
 }
 
 interface Props {
@@ -14,8 +16,9 @@ interface Props {
 }
 
 const AddStudent = ({ onSubmit }: Props): React.ReactElement => {
+  const { groups } = useGroups();
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<AddStudentFormValues>({
-    defaultValues: { firstName: '', lastName: '', middleName: '' },
+    defaultValues: { firstName: '', lastName: '', middleName: '', groupId: undefined },
     mode: 'onSubmit',
   });
 
@@ -42,6 +45,15 @@ const AddStudent = ({ onSubmit }: Props): React.ReactElement => {
         placeholder="Отчество"
         {...register('middleName')}
       />
+
+      <select
+        {...register('groupId')}
+      >
+        <option value={''}>Выберите группу</option>
+        {groups.map((g) => (
+          <option key={g.id} value={g.id}>{g.name}</option>
+        ))}
+      </select>
 
       <button type="submit" disabled={isSubmitting}>Добавить</button>
     </form>

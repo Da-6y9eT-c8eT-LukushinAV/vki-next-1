@@ -18,7 +18,10 @@ const Student = ({ student, onDelete }: Props): React.ReactElement => {
 
   return (
     <div className={`${styles.Student} ${student.isDeleted ? styles['--isDeleted'] : '' } `}>
-      <span>{studentName}</span>
+      <span>
+        {studentName}
+        {student.group ? ` — Группа: ${student.group.name}` : ''}
+      </span>
       <div className={styles.actions}>
         <Link href={`/students/${student.id}`} className={styles.actionButton}>
           Открыть
