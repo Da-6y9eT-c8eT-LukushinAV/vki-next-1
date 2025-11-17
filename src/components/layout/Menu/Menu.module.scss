@@ -6,12 +6,20 @@
   align-items: center;
   font-size: 18px;
   color: var(--color);
+  padding: 15px 0;
   a {
     color: var(--color);
     text-decoration: none;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: var(--link-color);
+    }
   }
 }
 
 .linkActive {
+  color: var(--link-color);
+  font-weight: 600;
   text-decoration: underline;
 }

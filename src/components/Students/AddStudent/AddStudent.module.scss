@@ -1,12 +1,73 @@
 .AddStudent {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: var(--background2);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  input,
+  select {
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    background-color: var(--color2);
+    color: var(--color);
+    transition: all 0.2s ease;
+    min-width: 150px;
+    flex: 1;
+
+    &:focus {
+      outline: none;
+      border-color: var(--link-color);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+    &::placeholder {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  button {
+    padding: 10px 24px;
+    background-color: var(--link-color);
+    color: var(--color2);
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-link-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
 }
 
 .Error {
-  color: red;
+  color: #E53E3E;
   font-size: 12px;
+  width: 100%;
+  margin-top: -8px;
+  padding-left: 4px;
 }
 
 

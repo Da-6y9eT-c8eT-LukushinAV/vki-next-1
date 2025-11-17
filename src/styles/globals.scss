@@ -1,12 +1,20 @@
 @use './main';
 
 :root {  
-  --color: #272727;
-  --color2: #FFF;
-  --color3: #FF6B6B;
-  --background: #FFF;
-  --background2: #E1E1E1;
-  --background3: #434343;  
+  --color: #2D3748;
+  --color2: #FFFFFF;
+  --color3: #4A90E2;
+  --background: #F5F7FA;
+  --background2: #E8EDF2;
+  --background3: #5A6C7D;
+  --item-color: #4A5568;
+  --current-color: #2C5282;
+  --link-color: #4A90E2;
+  --color-link: #4A90E2;
+  --color-link-hover: #2C5282;
+  --color-border: #CBD5E0;
+  --color-text: #2D3748;
+  --color-text-secondary: #718096;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -115,4 +123,20 @@ h4 {
   // }
 }
 
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: var(--color);
+  
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 

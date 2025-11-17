@@ -1,15 +1,17 @@
 @use '../../../styles/main';
 
 .Header {
-  height: 70px;
+  height: 80px;
   background-color: var(--background2);
   display: flex;
   align-items: center;
   padding: 0 main.$webSidePadding;
-  font-size: 20px;
+  font-size: 22px;
   gap: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .title {
   font-weight: bold;
+  color: var(--current-color);
 }

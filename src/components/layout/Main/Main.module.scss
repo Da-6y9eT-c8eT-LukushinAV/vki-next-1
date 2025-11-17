@@ -2,6 +2,7 @@
 
 .Main {
   display: flex;
-  min-height: calc(100vh - 180px);
-  padding: 20px main.$webSidePadding;
+  min-height: calc(100vh - 200px);
+  padding: 30px main.$webSidePadding;
+  background-color: var(--background);
 }
