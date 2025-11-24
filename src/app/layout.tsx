@@ -1,4 +1,5 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { cookies } from 'next/headers';
 
 import TanStackQuery from '@/containers/TanStackQuery';
 import { getGroupsApi } from '@/api/groupsApi';
@@ -13,6 +14,7 @@ import '@/styles/globals.scss';
 import { META_DESCRIPTION, META_TITLE } from '@/constants/meta';
 import type StudentInterface from '@/types/StudentInterface';
 import { getStudentsApi } from '@/api/studentsApi';
+import { verifyAccessToken } from '@/utils/jwt';
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -46,13 +48,18 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
     },
   });
 
+  // Проверяем токен авторизации
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const userFromServer = verifyAccessToken(accessToken);
+
   const state = dehydrate(queryClient, { shouldDehydrateQuery: () => true });
 
   return (
     <TanStackQuery state={state}>
       <html lang="ru">
         <body>
-          <Header />
+          <Header userFromServer={userFromServer} />
           <Main>
             <>{children}</>
           </Main>

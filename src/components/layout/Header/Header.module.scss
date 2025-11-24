@@ -14,4 +14,11 @@
 .title {
   font-weight: bold;
   color: var(--current-color);
+  flex-shrink: 0;
+}
+
+.menuWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }

@@ -2,11 +2,13 @@ import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { Group } from './entity/Group.entity';
 import { Student } from './entity/Student.entity';
+import { User } from './entity/User.entity';
+import { createTestUsers } from './userDb';
 
 const AppDataSource = new DataSource({
   type: 'sqlite',
   database: process.env.DB ?? './db/vki-web.db', // Path to your SQLite database file
-  entities: [Group, Student],
+  entities: [Group, Student, User],
   synchronize: true, // Auto-create schema on startup (use with caution in production)
   logging: false,
 });
@@ -26,9 +28,10 @@ const AppDataSource = new DataSource({
 // init();
 
 AppDataSource.initialize()
-  .then(() => {
+  .then(async () => {
     console.log('Data Source has been initialized!');
-    // You can now interact with your entities
+    // Создаем тестовых пользователей
+    await createTestUsers();
   })
   .catch((err) => {
     console.error('Error during Data Source initialization:', err);
